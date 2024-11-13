@@ -75,6 +75,7 @@ fun MainActivity(modifier: Modifier) {
     var lAge = remember { mutableStateListOf<String>() }
     var lId = remember { mutableStateListOf<String>() }
     var selectedItems = remember { mutableStateListOf<Int>() } // Lista de índices seleccionados
+    var editar = false
 
 
     fun mostrar(){
@@ -214,9 +215,20 @@ fun MainActivity(modifier: Modifier) {
                         .clickable {
                             if (i in selectedItems) {
                                 selectedItems.remove(i)  // Deseleccionar si ya estaba seleccionado
+                                for (i in selectedItems) {
+                                    nameValue = ""
+                                    ageValue = ""
+                                }
                                 Log.i("seleccion","Estoy deselecionado y soy {$selectedItems}")
                             } else {
                                 selectedItems.add(i)    // Seleccionar si no estaba seleccionado
+                                for (i in selectedItems) {
+                                    nameValue = lName[i]
+                                    ageValue = lAge[i]
+                                
+                                }
+
+
                                 Log.i("seleccion","Estoy selecionado y soy {$selectedItems}")
                             }
 
