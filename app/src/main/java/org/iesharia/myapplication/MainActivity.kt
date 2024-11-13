@@ -3,6 +3,7 @@ package org.iesharia.myapplication
 import android.annotation.SuppressLint
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -213,9 +214,12 @@ fun MainActivity(modifier: Modifier) {
                         .clickable {
                             if (i in selectedItems) {
                                 selectedItems.remove(i)  // Deseleccionar si ya estaba seleccionado
+                                Log.i("seleccion","Estoy deselecionado y soy {$selectedItems}")
                             } else {
                                 selectedItems.add(i)    // Seleccionar si no estaba seleccionado
+                                Log.i("seleccion","Estoy selecionado y soy {$selectedItems}")
                             }
+
                         }
 
 
