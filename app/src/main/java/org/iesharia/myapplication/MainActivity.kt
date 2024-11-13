@@ -164,7 +164,7 @@ fun MainActivity(modifier: Modifier) {
                 modifier = Modifier.padding(15.dp),
                 onClick = {
                     // Eliminar todos los elementos seleccionados
-                    selectedItems.forEach { i ->
+                    for (i in selectedItems.sortedDescending()) {
                         val wasDeleted = db.deleteName(lId[i])
                         if (wasDeleted) {
                             lName.removeAt(i)
@@ -178,6 +178,26 @@ fun MainActivity(modifier: Modifier) {
                 }
             ) {
                 Text(text = "Borrar")
+            }
+            // boton para actualizar
+            Button(
+                modifier = Modifier.padding(15.dp),
+                onClick = {
+                    for (i in selectedItems) {
+                        val id = lId[i]  // Obtener el ID del elemento seleccionado
+                        val edited = db.updateName(id, nameValue, ageValue)  // Actualizar el nombre y la edad en la base de datos
+                        if (edited) {
+                            lName[i] = nameValue  // Actualizar el nombre en la lista local
+                            lAge[i] = ageValue    // Actualizar la edad en la lista local
+                        }
+                    }
+                    selectedItems.clear()  // Limpiar los elementos seleccionados después de actualizar
+                    Toast.makeText(context, "Registros seleccionados actualizados", Toast.LENGTH_SHORT).show()
+                    mostrar()
+                    }
+
+            ) {
+                Text(text = "Actu")
             }
         }
 
